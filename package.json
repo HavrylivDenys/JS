@@ -4,7 +4,8 @@
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build",
+    "build": "gulp build",
+    "deploy": "gh-pages -d dist",
     "lint": "eslint ./src/**/*.ts",
     "lint-fix": "eslint --fix ./src/**/*.ts",
     "prettier": "prettier --single-quote --write ."
@@ -16,6 +17,7 @@
     "eslint": "^8.17.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.2",
+    "gh-pages": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-eslint-new": "^1.5.1",
     "gulp-prettier": "^4.0.0",
