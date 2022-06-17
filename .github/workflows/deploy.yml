@@ -2,12 +2,8 @@ name: deploy
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-  pull_request_target:
-    branches:
-      - main
+  push:
+    branches: [ "main" ]
 
 jobs:
   build:
@@ -15,7 +11,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
     
     steps:
     - uses: actions/checkout@v3
@@ -38,7 +34,7 @@ jobs:
     steps:
     - name: Build
       run: |
-        pm run build
+        npm run build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
