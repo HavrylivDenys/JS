@@ -1,6 +1,6 @@
-const names = ['Hello', 'World', 'Denys', 'Viktor', 'Roman'];
+const names = ['Hello', 'World', 'Denys', 'Viktor', 'Roman', 'Marria'];
 
-const getRandomInt = (max = 5) => Math.floor(Math.random() * max);
+const getRandomInt = (max = names.length) => Math.floor(Math.random() * max);
 
 const handleClick = (e: Event) => {
   const element = e.target as HTMLElement;
