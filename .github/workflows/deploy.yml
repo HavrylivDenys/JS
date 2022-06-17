@@ -1,8 +1,13 @@
 name: deploy
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+  pull_request_target:
+    branches:
+      - main
 
 jobs:
   build:
@@ -20,10 +25,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: Build
+    - name: Install
       run: |
         npm install
-        gulp build
   
   deploy:
     needs: [build]
@@ -32,9 +36,11 @@ jobs:
       contents: write
 
     steps:
+    - name: Build
+      run: |
+        pm run build
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
