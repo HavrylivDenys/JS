@@ -3,8 +3,6 @@ name: deploy
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
@@ -12,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x]
     
     steps:
     - uses: actions/checkout@v3
@@ -36,6 +34,7 @@ jobs:
     steps:
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.ref == 'refs/heads/main' }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./dist
