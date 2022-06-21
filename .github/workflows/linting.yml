@@ -1,15 +1,11 @@
-name: deploy
+name: linting
 
 on:
   workflow_dispatch:
   push:
     branches: ['main']
-    paths:
-      - 'scr/**/*'
-      - '.eslintrc.yml'
-      - 'gulpfile.mjs'
-      - 'package.json'
-      - 'tsconfig.json'
+  pull_request:
+    branches: ['main']
 
 jobs:
   build:
@@ -29,13 +25,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Install
+      - name: Lint
         run: |
           npm install
-          gulp build
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          gulp validate

@@ -25,7 +25,10 @@ gulp.task('format_html', () => {
 });
 
 gulp.task('format_scss', () => {
-  return gulp.src('./src/**/*.scss').pipe(prettier());
+  return gulp
+    .src('./src/**/*.scss')
+    .pipe(prettier())
+    .pipe(gulp.dest((file) => file.base));
 });
 
 gulp.task('lint', () => {
