@@ -3,7 +3,9 @@ name: linting
 on:
   workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: ['main']
+  pull_request:
+    branches: ['main']
 
 jobs:
   build:
@@ -14,16 +16,16 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-    
-    steps:
-    - uses: actions/checkout@v3
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Lint
-      run: |
-        npm install
-        gulp validate
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Lint
+        run: |
+          npm install
+          gulp validate
